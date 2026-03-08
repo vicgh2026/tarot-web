@@ -42,12 +42,11 @@
                 align-items: center; 
             }
 
-            /* 這裡調大了手機版按鈕的數值 */
             button {
-                font-size: 18px;       /* 字體加大 */
-                padding: 14px 24px;    /* 增加內距，讓按鈕變厚 */
+                font-size: 18px;
+                padding: 12px 24px;
                 margin: 10px;
-                width: 200px;          /* 增加寬度 */
+                width: 200px;
             }
 
             .card-name {
@@ -59,6 +58,7 @@
         .card-container {
             text-align: center;
         }
+
         img {
             width: 250px;
             height: auto;
@@ -66,6 +66,7 @@
             border-radius: 10px;
             box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
         }
+
         .card-name {
             margin-top: 10px;
             font-size: 18px;
@@ -169,37 +170,64 @@
             { image: "77_DISKS_PRINCESS.jpg", name: "盤之公主" }
         ];
 
-        // 修正後的公平洗牌邏輯 (Fisher-Yates Shuffle)
-        function getRandomCards(num) {
-            // 先複製一份原始牌庫，避免影響到原始資料
-            let shuffled = [...tarotCards];
-            
-            // 從最後一張牌開始，隨機與前面的牌交換位置
+        function secureRandomInt(max) {
+            if (!Number.isInteger(max) || max <= 0) {
+                throw new Error("max 必須是大於 0 的整數");
+            }
+
+            const randomArray = new Uint32Array(1);
+            const maxUint32 = 4294967296;
+            const limit = Math.floor(maxUint32 / max) * max;
+
+            while (true) {
+                crypto.getRandomValues(randomArray);
+                const value = randomArray[0];
+
+                if (value < limit) {
+                    return value % max;
+                }
+            }
+        }
+
+        function shuffleCards(cards) {
+            const shuffled = [...cards];
+
             for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                // 交換位置
+                const j = secureRandomInt(i + 1);
                 [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
             }
-            
-            // 洗好後，取出前 num 張
+
+            return shuffled;
+        }
+
+        function getRandomCards(num) {
+            if (!Number.isInteger(num) || num <= 0) {
+                throw new Error("抽牌張數必須是大於 0 的整數");
+            }
+
+            if (num > tarotCards.length) {
+                throw new Error("抽牌張數不可超過牌組總數");
+            }
+
+            const shuffled = shuffleCards(tarotCards);
             return shuffled.slice(0, num);
         }
 
         function displayCards(cards, showYesNo = false) {
             const resultArea = document.getElementById("result-area");
-            resultArea.innerHTML = ""; 
+            resultArea.innerHTML = "";
 
             cards.forEach(card => {
                 const cardDiv = document.createElement("div");
                 cardDiv.className = "card-container";
-                
+
                 let contentHTML = `<img src="THOTH-CARDS-78/${card.image}" alt="${card.name}">`;
-                
+
                 if (showYesNo) {
-                    const isYes = Math.random() >= 0.5;
+                    const isYes = secureRandomInt(2) === 1;
                     const yesNoText = isYes ? "是" : "否";
                     const yesNoColor = isYes ? "#6495ED" : "#A52A2A";
-                    
+
                     contentHTML += `
                         <div class="card-name">
                             <span style="color: ${yesNoColor};">${yesNoText}</span>，${card.name}
@@ -208,7 +236,7 @@
                 } else {
                     contentHTML += `<div class="card-name">${card.name}</div>`;
                 }
-                
+
                 cardDiv.innerHTML = contentHTML;
                 resultArea.appendChild(cardDiv);
             });
@@ -228,5 +256,3 @@
     </script>
 </body>
 </html>
-
-
