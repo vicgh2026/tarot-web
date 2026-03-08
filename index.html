@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>托特塔羅牌抽牌</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        #result-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            min-height: 400px;
+            flex-direction: row;
+        }
+
+        @media (max-width: 768px) {
+            #result-area {
+                flex-direction: column;
+                gap: 45px;
+            }
+            
+            #button-area {
+                display: flex;
+                flex-direction: column;
+                align-items: center; 
+            }
+
+            button {
+                font-size: 14px;
+                padding: 7.5px 15px;
+                margin: 8px;
+                width: 150px;
+            }
+
+            .card-name {
+                font-size: 16px !important;
+                margin-top: 5px !important;
+            }
+        }
+
+        .card-container {
+            text-align: center;
+        }
+        img {
+            width: 250px;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+        }
+        .card-name {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="result-area">
+        <div class="card-container">
+            <img src="THOTH-CARDS-78/card_back.jpg" alt="牌背">
+        </div>
+    </div>
+
+    <div id="button-area">
+        <button onclick="drawOne()">單張結果</button>
+        <button onclick="drawYesNo()">是/否牌陣</button>
+        <button onclick="drawThree()">三張牌陣</button>
+    </div>
+
+    <script>
+        const tarotCards = [
+            { image: "00_THE-FOOL.jpg", name: "傻瓜" },
+            { image: "01_THE-MAGUS.jpg", name: "賢者" },
+            { image: "02_THE-PRIESTESS.jpg", name: "女祭司" },
+            { image: "03_THE-EMPRESS.jpg", name: "女皇" },
+            { image: "04_THE-EMPEROR.jpg", name: "皇帝" },
+            { image: "05_THE-HIEROPHANT.jpg", name: "教皇" },
+            { image: "06_THE-LOVERS.jpg", name: "戀人" },
+            { image: "07_THE-CHARIOT.jpg", name: "戰車" },
+            { image: "08_ADJUSTMENT.jpg", name: "調整" },
+            { image: "09_THE-HERMIT.jpg", name: "隱者" },
+            { image: "10_FORTUNE.jpg", name: "命運之輪" },
+            { image: "11_LUST.jpg", name: "慾望" },
+            { image: "12_THE-HANGED-MAN.jpg", name: "倒吊人" },
+            { image: "13_DEATH.jpg", name: "死亡" },
+            { image: "14_ART.jpg", name: "藝術" },
+            { image: "15_THE-DEVIL.jpg", name: "魔鬼" },
+            { image: "16_THE-TOWER.jpg", name: "塔" },
+            { image: "17_THE-STAR.jpg", name: "星星" },
+            { image: "18_THE-MOON.jpg", name: "月亮" },
+            { image: "19_THE-SUN.jpg", name: "太陽" },
+            { image: "20_THE-AEON.jpg", name: "新世紀" },
+            { image: "21_THE-UNIVERSE.jpg", name: "宇宙" },
+            { image: "22_WANDS_01.jpg", name: "權杖一" },
+            { image: "23_WANDS_02.jpg", name: "權杖二" },
+            { image: "24_WANDS_03.jpg", name: "權杖三" },
+            { image: "25_WANDS_04.jpg", name: "權杖四" },
+            { image: "26_WANDS_05.jpg", name: "權杖五" },
+            { image: "27_WANDS_06.jpg", name: "權杖六" },
+            { image: "28_WANDS_07.jpg", name: "權杖七" },
+            { image: "29_WANDS_08.jpg", name: "權杖八" },
+            { image: "30_WANDS_09.jpg", name: "權杖九" },
+            { image: "31_WANDS_10.jpg", name: "權杖十" },
+            { image: "32_CUPS_01.jpg", name: "杯之一" },
+            { image: "33_CUPS_02.jpg", name: "杯之二" },
+            { image: "34_CUPS_03.jpg", name: "杯之三" },
+            { image: "35_CUPS_04.jpg", name: "杯之四" },
+            { image: "36_CUPS_05.jpg", name: "杯之五" },
+            { image: "37_CUPS_06.jpg", name: "杯之六" },
+            { image: "38_CUPS_07.jpg", name: "杯之七" },
+            { image: "39_CUPS_08.jpg", name: "杯之八" },
+            { image: "40_CUPS_09.jpg", name: "杯之九" },
+            { image: "41_CUPS_10.jpg", name: "杯之十" },
+            { image: "42_SWORDS_01.jpg", name: "劍之一" },
+            { image: "43_SWORDS_02.jpg", name: "劍之二" },
+            { image: "44_SWORDS_03.jpg", name: "劍之三" },
+            { image: "45_SWORDS_04.jpg", name: "劍之四" },
+            { image: "46_SWORDS_05.jpg", name: "劍之五" },
+            { image: "47_SWORDS_06.jpg", name: "劍之六" },
+            { image: "48_SWORDS_07.jpg", name: "劍之七" },
+            { image: "49_SWORDS_08.jpg", name: "劍之八" },
+            { image: "50_SWORDS_09.jpg", name: "劍之九" },
+            { image: "51_SWORDS_10.jpg", name: "劍之十" },
+            { image: "52_DISKS_01.jpg", name: "盤之一" },
+            { image: "53_DISKS_02.jpg", name: "盤之二" },
+            { image: "54_DISKS_03.jpg", name: "盤之三" },
+            { image: "55_DISKS_04.jpg", name: "盤之四" },
+            { image: "56_DISKS_05.jpg", name: "盤之五" },
+            { image: "57_DISKS_06.jpg", name: "盤之六" },
+            { image: "58_DISKS_07.jpg", name: "盤之七" },
+            { image: "59_DISKS_08.jpg", name: "盤之八" },
+            { image: "60_DISKS_09.jpg", name: "盤之九" },
+            { image: "61_DISKS_10.jpg", name: "盤之十" },
+            { image: "62_WANDS_KNIGHT.jpg", name: "權杖騎士" },
+            { image: "63_WANDS_QUEEN.jpg", name: "權杖皇后" },
+            { image: "64_WANDS_PRINCE.jpg", name: "權杖王子" },
+            { image: "65_WANDS_PRINCESS.jpg", name: "權杖公主" },
+            { image: "66_CUPS_KNIGHT.jpg", name: "杯之騎士" },
+            { image: "67_CUPS_QUEEN.jpg", name: "杯之皇后" },
+            { image: "68_CUPS_PRINCE.jpg", name: "杯之王子" },
+            { image: "69_CUPS_PRINCESS.jpg", name: "杯之公主" },
+            { image: "70_SWORDS_KNIGHT.jpg", name: "劍之騎士" },
+            { image: "71_SWORDS_QUEEN.jpg", name: "劍之皇后" },
+            { image: "72_SWORDS_PRINCE.jpg", name: "劍之王子" },
+            { image: "73_SWORDS_PRINCESS.jpg", name: "劍之公主" },
+            { image: "74_DISKS_KNIGHT.jpg", name: "盤之騎士" },
+            { image: "75_DISKS_QUEEN.jpg", name: "盤之皇后" },
+            { image: "76_DISKS_PRINCE.jpg", name: "盤之王子" },
+            { image: "77_DISKS_PRINCESS.jpg", name: "盤之公主" }
+        ];
+
+        function getRandomCards(num) {
+            const shuffled = [...tarotCards].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, num);
+        }
+
+        function displayCards(cards, showYesNo = false) {
+            const resultArea = document.getElementById("result-area");
+            resultArea.innerHTML = ""; 
+
+            cards.forEach(card => {
+                const cardDiv = document.createElement("div");
+                cardDiv.className = "card-container";
+                
+                let contentHTML = `<img src="THOTH-CARDS-78/${card.image}" alt="${card.name}">`;
+                
+                if (showYesNo) {
+                    const isYes = Math.random() >= 0.5;
+                    const yesNoText = isYes ? "是" : "否";
+                    const yesNoColor = isYes ? "#6495ED" : "#A52A2A";
+                    
+                    contentHTML += `
+                        <div class="card-name">
+                            <span style="color: ${yesNoColor};">${yesNoText}</span>，${card.name}
+                        </div>
+                    `;
+                } else {
+                    contentHTML += `<div class="card-name">${card.name}</div>`;
+                }
+                
+                cardDiv.innerHTML = contentHTML;
+                resultArea.appendChild(cardDiv);
+            });
+        }
+
+        function drawOne() {
+            displayCards(getRandomCards(1));
+        }
+
+        function drawYesNo() {
+            displayCards(getRandomCards(1), true);
+        }
+
+        function drawThree() {
+            displayCards(getRandomCards(3));
+        }
+    </script>
+</body>
+</html>
