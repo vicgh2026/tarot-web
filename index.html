@@ -169,8 +169,19 @@
             { image: "77_DISKS_PRINCESS.jpg", name: "盤之公主" }
         ];
 
+        // 修正後的公平洗牌邏輯 (Fisher-Yates Shuffle)
         function getRandomCards(num) {
-            const shuffled = [...tarotCards].sort(() => 0.5 - Math.random());
+            // 先複製一份原始牌庫，避免影響到原始資料
+            let shuffled = [...tarotCards];
+            
+            // 從最後一張牌開始，隨機與前面的牌交換位置
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                // 交換位置
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            
+            // 洗好後，取出前 num 張
             return shuffled.slice(0, num);
         }
 
@@ -217,4 +228,5 @@
     </script>
 </body>
 </html>
+
 
