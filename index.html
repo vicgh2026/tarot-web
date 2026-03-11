@@ -90,85 +90,124 @@
 
     <script>
         const tarotCards = [
-            { image: "00_THE-FOOL.jpg", name: "傻瓜" },
-            { image: "01_THE-MAGUS.jpg", name: "賢者" },
-            { image: "02_THE-PRIESTESS.jpg", name: "女祭司" },
-            { image: "03_THE-EMPRESS.jpg", name: "女皇" },
-            { image: "04_THE-EMPEROR.jpg", name: "皇帝" },
-            { image: "05_THE-HIEROPHANT.jpg", name: "教皇" },
-            { image: "06_THE-LOVERS.jpg", name: "戀人" },
-            { image: "07_THE-CHARIOT.jpg", name: "戰車" },
-            { image: "08_ADJUSTMENT.jpg", name: "調整" },
-            { image: "09_THE-HERMIT.jpg", name: "隱者" },
-            { image: "10_FORTUNE.jpg", name: "命運之輪" },
-            { image: "11_LUST.jpg", name: "慾望" },
-            { image: "12_THE-HANGED-MAN.jpg", name: "倒吊人" },
-            { image: "13_DEATH.jpg", name: "死亡" },
-            { image: "14_ART.jpg", name: "藝術" },
-            { image: "15_THE-DEVIL.jpg", name: "魔鬼" },
-            { image: "16_THE-TOWER.jpg", name: "塔" },
-            { image: "17_THE-STAR.jpg", name: "星星" },
-            { image: "18_THE-MOON.jpg", name: "月亮" },
-            { image: "19_THE-SUN.jpg", name: "太陽" },
-            { image: "20_THE-AEON.jpg", name: "新世紀" },
-            { image: "21_THE-UNIVERSE.jpg", name: "宇宙" },
-            { image: "22_WANDS_01.jpg", name: "權杖一" },
-            { image: "23_WANDS_02.jpg", name: "權杖二" },
-            { image: "24_WANDS_03.jpg", name: "權杖三" },
-            { image: "25_WANDS_04.jpg", name: "權杖四" },
-            { image: "26_WANDS_05.jpg", name: "權杖五" },
-            { image: "27_WANDS_06.jpg", name: "權杖六" },
-            { image: "28_WANDS_07.jpg", name: "權杖七" },
-            { image: "29_WANDS_08.jpg", name: "權杖八" },
-            { image: "30_WANDS_09.jpg", name: "權杖九" },
-            { image: "31_WANDS_10.jpg", name: "權杖十" },
-            { image: "32_CUPS_01.jpg", name: "杯之一" },
-            { image: "33_CUPS_02.jpg", name: "杯之二" },
-            { image: "34_CUPS_03.jpg", name: "杯之三" },
-            { image: "35_CUPS_04.jpg", name: "杯之四" },
-            { image: "36_CUPS_05.jpg", name: "杯之五" },
-            { image: "37_CUPS_06.jpg", name: "杯之六" },
-            { image: "38_CUPS_07.jpg", name: "杯之七" },
-            { image: "39_CUPS_08.jpg", name: "杯之八" },
-            { image: "40_CUPS_09.jpg", name: "杯之九" },
-            { image: "41_CUPS_10.jpg", name: "杯之十" },
-            { image: "42_SWORDS_01.jpg", name: "劍之一" },
-            { image: "43_SWORDS_02.jpg", name: "劍之二" },
-            { image: "44_SWORDS_03.jpg", name: "劍之三" },
-            { image: "45_SWORDS_04.jpg", name: "劍之四" },
-            { image: "46_SWORDS_05.jpg", name: "劍之五" },
-            { image: "47_SWORDS_06.jpg", name: "劍之六" },
-            { image: "48_SWORDS_07.jpg", name: "劍之七" },
-            { image: "49_SWORDS_08.jpg", name: "劍之八" },
-            { image: "50_SWORDS_09.jpg", name: "劍之九" },
-            { image: "51_SWORDS_10.jpg", name: "劍之十" },
-            { image: "52_DISKS_01.jpg", name: "盤之一" },
-            { image: "53_DISKS_02.jpg", name: "盤之二" },
-            { image: "54_DISKS_03.jpg", name: "盤之三" },
-            { image: "55_DISKS_04.jpg", name: "盤之四" },
-            { image: "56_DISKS_05.jpg", name: "盤之五" },
-            { image: "57_DISKS_06.jpg", name: "盤之六" },
-            { image: "58_DISKS_07.jpg", name: "盤之七" },
-            { image: "59_DISKS_08.jpg", name: "盤之八" },
-            { image: "60_DISKS_09.jpg", name: "盤之九" },
-            { image: "61_DISKS_10.jpg", name: "盤之十" },
-            { image: "62_WANDS_KNIGHT.jpg", name: "權杖騎士" },
-            { image: "63_WANDS_QUEEN.jpg", name: "權杖皇后" },
-            { image: "64_WANDS_PRINCE.jpg", name: "權杖王子" },
-            { image: "65_WANDS_PRINCESS.jpg", name: "權杖公主" },
-            { image: "66_CUPS_KNIGHT.jpg", name: "杯之騎士" },
-            { image: "67_CUPS_QUEEN.jpg", name: "杯之皇后" },
-            { image: "68_CUPS_PRINCE.jpg", name: "杯之王子" },
-            { image: "69_CUPS_PRINCESS.jpg", name: "杯之公主" },
-            { image: "70_SWORDS_KNIGHT.jpg", name: "劍之騎士" },
-            { image: "71_SWORDS_QUEEN.jpg", name: "劍之皇后" },
-            { image: "72_SWORDS_PRINCE.jpg", name: "劍之王子" },
-            { image: "73_SWORDS_PRINCESS.jpg", name: "劍之公主" },
-            { image: "74_DISKS_KNIGHT.jpg", name: "盤之騎士" },
-            { image: "75_DISKS_QUEEN.jpg", name: "盤之皇后" },
-            { image: "76_DISKS_PRINCE.jpg", name: "盤之王子" },
-            { image: "77_DISKS_PRINCESS.jpg", name: "盤之公主" }
+            { image: "00_THE-FOOL.jpg", name: "傻瓜", yesNoScore: 0 },
+            { image: "01_THE-MAGUS.jpg", name: "賢者", yesNoScore: 1 },
+            { image: "02_THE-PRIESTESS.jpg", name: "女祭司", yesNoScore: 0 },
+            { image: "03_THE-EMPRESS.jpg", name: "女皇", yesNoScore: 2 },
+            { image: "04_THE-EMPEROR.jpg", name: "皇帝", yesNoScore: 2 },
+            { image: "05_THE-HIEROPHANT.jpg", name: "教皇", yesNoScore: 1 },
+            { image: "06_THE-LOVERS.jpg", name: "戀人", yesNoScore: 1 },
+            { image: "07_THE-CHARIOT.jpg", name: "戰車", yesNoScore: 2 },
+            { image: "08_ADJUSTMENT.jpg", name: "調整", yesNoScore: 0 },
+            { image: "09_THE-HERMIT.jpg", name: "隱者", yesNoScore: 0 },
+            { image: "10_FORTUNE.jpg", name: "命運之輪", yesNoScore: 2 },
+            { image: "11_LUST.jpg", name: "慾望", yesNoScore: 2 },
+            { image: "12_THE-HANGED-MAN.jpg", name: "倒吊人", yesNoScore: -1 },
+            { image: "13_DEATH.jpg", name: "死亡", yesNoScore: -1 },
+            { image: "14_ART.jpg", name: "藝術", yesNoScore: 1 },
+            { image: "15_THE-DEVIL.jpg", name: "魔鬼", yesNoScore: -1 },
+            { image: "16_THE-TOWER.jpg", name: "塔", yesNoScore: -2 },
+            { image: "17_THE-STAR.jpg", name: "星星", yesNoScore: 2 },
+            { image: "18_THE-MOON.jpg", name: "月亮", yesNoScore: -1 },
+            { image: "19_THE-SUN.jpg", name: "太陽", yesNoScore: 2 },
+            { image: "20_THE-AEON.jpg", name: "新世紀", yesNoScore: 1 },
+            { image: "21_THE-UNIVERSE.jpg", name: "宇宙", yesNoScore: 2 },
+            { image: "22_WANDS_01.jpg", name: "魔杖一", yesNoScore: 1 },
+            { image: "23_WANDS_02.jpg", name: "魔杖二", yesNoScore: 2 },
+            { image: "24_WANDS_03.jpg", name: "魔杖三", yesNoScore: 2 },
+            { image: "25_WANDS_04.jpg", name: "魔杖四", yesNoScore: 2 },
+            { image: "26_WANDS_05.jpg", name: "魔杖五", yesNoScore: -2 },
+            { image: "27_WANDS_06.jpg", name: "魔杖六", yesNoScore: 2 },
+            { image: "28_WANDS_07.jpg", name: "魔杖七", yesNoScore: 0 },
+            { image: "29_WANDS_08.jpg", name: "魔杖八", yesNoScore: 1 },
+            { image: "30_WANDS_09.jpg", name: "魔杖九", yesNoScore: 2 },
+            { image: "31_WANDS_10.jpg", name: "魔杖十", yesNoScore: -2 },
+            { image: "32_CUPS_01.jpg", name: "杯之一", yesNoScore: 1 },
+            { image: "33_CUPS_02.jpg", name: "杯之二", yesNoScore: 2 },
+            { image: "34_CUPS_03.jpg", name: "杯之三", yesNoScore: 2 },
+            { image: "35_CUPS_04.jpg", name: "杯之四", yesNoScore: 0 },
+            { image: "36_CUPS_05.jpg", name: "杯之五", yesNoScore: -2 },
+            { image: "37_CUPS_06.jpg", name: "杯之六", yesNoScore: 2 },
+            { image: "38_CUPS_07.jpg", name: "杯之七", yesNoScore: -2 },
+            { image: "39_CUPS_08.jpg", name: "杯之八", yesNoScore: -2 },
+            { image: "40_CUPS_09.jpg", name: "杯之九", yesNoScore: 2 },
+            { image: "41_CUPS_10.jpg", name: "杯之十", yesNoScore: 0 },
+            { image: "42_SWORDS_01.jpg", name: "劍之一", yesNoScore: 0 },
+            { image: "43_SWORDS_02.jpg", name: "劍之二", yesNoScore: 1 },
+            { image: "44_SWORDS_03.jpg", name: "劍之三", yesNoScore: -2 },
+            { image: "45_SWORDS_04.jpg", name: "劍之四", yesNoScore: 0 },
+            { image: "46_SWORDS_05.jpg", name: "劍之五", yesNoScore: -2 },
+            { image: "47_SWORDS_06.jpg", name: "劍之六", yesNoScore: 2 },
+            { image: "48_SWORDS_07.jpg", name: "劍之七", yesNoScore: -2 },
+            { image: "49_SWORDS_08.jpg", name: "劍之八", yesNoScore: -2 },
+            { image: "50_SWORDS_09.jpg", name: "劍之九", yesNoScore: -2 },
+            { image: "51_SWORDS_10.jpg", name: "劍之十", yesNoScore: -2 },
+            { image: "52_DISKS_01.jpg", name: "盤之一", yesNoScore: 1 },
+            { image: "53_DISKS_02.jpg", name: "盤之二", yesNoScore: 1 },
+            { image: "54_DISKS_03.jpg", name: "盤之三", yesNoScore: 2 },
+            { image: "55_DISKS_04.jpg", name: "盤之四", yesNoScore: 2 },
+            { image: "56_DISKS_05.jpg", name: "盤之五", yesNoScore: -2 },
+            { image: "57_DISKS_06.jpg", name: "盤之六", yesNoScore: 2 },
+            { image: "58_DISKS_07.jpg", name: "盤之七", yesNoScore: -2 },
+            { image: "59_DISKS_08.jpg", name: "盤之八", yesNoScore: 1 },
+            { image: "60_DISKS_09.jpg", name: "盤之九", yesNoScore: 2 },
+            { image: "61_DISKS_10.jpg", name: "盤之十", yesNoScore: 2 },
+            { image: "62_WANDS_KNIGHT.jpg", name: "魔杖騎士", yesNoScore: 1 },
+            { image: "63_WANDS_QUEEN.jpg", name: "魔杖皇后", yesNoScore: 2 },
+            { image: "64_WANDS_PRINCE.jpg", name: "魔杖王子", yesNoScore: 1 },
+            { image: "65_WANDS_PRINCESS.jpg", name: "魔杖公主", yesNoScore: 1 },
+            { image: "66_CUPS_KNIGHT.jpg", name: "杯之騎士", yesNoScore: 1 },
+            { image: "67_CUPS_QUEEN.jpg", name: "杯之皇后", yesNoScore: 1 },
+            { image: "68_CUPS_PRINCE.jpg", name: "杯之王子", yesNoScore: 0 },
+            { image: "69_CUPS_PRINCESS.jpg", name: "杯之公主", yesNoScore: 1 },
+            { image: "70_SWORDS_KNIGHT.jpg", name: "劍之騎士", yesNoScore: -1 },
+            { image: "71_SWORDS_QUEEN.jpg", name: "劍之皇后", yesNoScore: 0 },
+            { image: "72_SWORDS_PRINCE.jpg", name: "劍之王子", yesNoScore: -1 },
+            { image: "73_SWORDS_PRINCESS.jpg", name: "劍之公主", yesNoScore: -1 },
+            { image: "74_DISKS_KNIGHT.jpg", name: "盤之騎士", yesNoScore: 1 },
+            { image: "75_DISKS_QUEEN.jpg", name: "盤之皇后", yesNoScore: 2 },
+            { image: "76_DISKS_PRINCE.jpg", name: "盤之王子", yesNoScore: 0 },
+            { image: "77_DISKS_PRINCESS.jpg", name: "盤之公主", yesNoScore: 0 }
         ];
+
+
+        const yesNoProbabilityMap = {
+            2: 0.8,
+            1: 0.65,
+            0: 0.5,
+            [-1]: 0.35,
+            [-2]: 0.2
+        };
+
+        const yesNoLabelMap = {
+            2: "強烈偏是",
+            1: "偏是",
+            0: "中立",
+            [-1]: "偏否",
+            [-2]: "強烈偏否"
+        };
+
+        function getYesProbability(card) {
+            const score = Number.isInteger(card.yesNoScore) ? card.yesNoScore : 0;
+            return yesNoProbabilityMap[score] ?? 0.5;
+        }
+
+        function getYesNoMeta(card) {
+            const yesProbability = getYesProbability(card);
+            const isYes = Math.random() < yesProbability;
+            const yesPercent = Math.round(yesProbability * 100);
+            const noPercent = 100 - yesPercent;
+            const score = Number.isInteger(card.yesNoScore) ? card.yesNoScore : 0;
+
+            return {
+                isYes,
+                text: isYes ? "是" : "否",
+                color: isYes ? "#4169E1" : "#8B0000",
+                tendency: yesNoLabelMap[score] ?? "中立",
+                yesPercent,
+                noPercent
+            };
+        }
 
         function secureRandomInt(max) {
             if (!Number.isInteger(max) || max <= 0) {
@@ -224,13 +263,14 @@
                 let contentHTML = `<img src="THOTH-CARDS-78/${card.image}" alt="${card.name}">`;
 
                 if (showYesNo) {
-                    const isYes = secureRandomInt(2) === 1;
-                    const yesNoText = isYes ? "是" : "否";
-                    const yesNoColor = isYes ? "#6495ED" : "#A52A2A";
+                    const yesNoMeta = getYesNoMeta(card);
 
                     contentHTML += `
                         <div class="card-name">
-                            <span style="color: ${yesNoColor};">${yesNoText}</span>，${card.name}
+                            <span style="color: ${yesNoMeta.color}; font-weight: 600;">${yesNoMeta.text}</span>，${card.name}
+                        </div>
+                        <div class="card-name" style="font-size: 14px; color: #555; margin-top: 4px; line-height: 1.5;">
+                            ${yesNoMeta.tendency}｜是 ${yesNoMeta.yesPercent}%／否 ${yesNoMeta.noPercent}%
                         </div>
                     `;
                 } else {
